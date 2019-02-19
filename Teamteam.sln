@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TeamTeam", "TeamTeam", "{19
 	ProjectSection(SolutionItems) = preProject
 		TeamTeam\index.html = TeamTeam\index.html
 		TeamTeam\LookupMyTicket.html = TeamTeam\LookupMyTicket.html
+		README.txt = README.txt
 		TeamTeam\SearchForFlights.html = TeamTeam\SearchForFlights.html
 	EndProjectSection
 EndProject
@@ -31,6 +32,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{054CDB89-AE86-4B35-A824-5C6435E690F6}"
 	ProjectSection(SolutionItems) = preProject
 		TeamTeam\Scripts\bootstrap.min.js = TeamTeam\Scripts\bootstrap.min.js
+		TeamTeam\Scripts\heatmap.min.js = TeamTeam\Scripts\heatmap.min.js
 		TeamTeam\Scripts\jquery-3.3.1.min.js = TeamTeam\Scripts\jquery-3.3.1.min.js
 		TeamTeam\Scripts\knockout-3.4.2.js = TeamTeam\Scripts\knockout-3.4.2.js
 		TeamTeam\Scripts\popper.min.js = TeamTeam\Scripts\popper.min.js
