@@ -18,10 +18,9 @@ var HeatMapViewModel = function() {
             dataType: "json",
             success: function (data) {
 
-                }
-            },
+                },
             error: function (data) {
-
+                self.submit();
             }
         });
     }

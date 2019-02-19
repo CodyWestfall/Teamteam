@@ -19,7 +19,7 @@
 
       <!-- NavBar -->
       <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-          <a class="navbar-brand" href="index.html">Gold Team</a>
+          <a class="navbar-brand" href="index.html">Team Team</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
           </button>
@@ -42,77 +42,6 @@
       <!-- Content of page -->
       <div class="container">
 
-          <br>
-          <!-- A row that represents the entire page -->
-          <div class="row">
-
-              <!-- Column which represents the side panel, this will include the search & filtering inputs -->
-              <div class="col-md-3 col-lg-3">
-                  <form data-bind="submit: submit">
-                      <div class="form-group">
-                          <label for="departureLocation">Departure Location</label>
-                          <select class="form-control" id="departureLocation" data-bind="value: DepartureLocation">
-                              <option>DFW</option>
-                              <option>DTW</option>
-                              <option>JFK</option>
-                              <option>Atlanta</option>
-                          </select>
-                      </div>
-                      <div class="form-group">
-                          <label for="destination">Destination</label>
-                          <select class="form-control" id="destination" data-bind="value: Destination">
-                              <option>DFW</option>
-                              <option>DTW</option>
-                              <option>JFK</option>
-                              <option>Atlanta</option>
-                          </select>
-                      </div>
-                      <div class="form-group">
-                          <label for="departureTime">Departure Date</label>
-                          <input type="date" class="form-control" id="departureTime" placeholder="Departure Date" data-bind="value: DepartureDate">
-                      </div>
-                      <div class="form-group">
-                          <label for="arrivalTime">Arrival Date</label>
-                          <input type="date" class="form-control" id="arrivalTime" placeholder="Arrival Date" data-bind="value: ArrivalDate">
-                      </div>
-                      <div class="form-group">
-                          <label for="exampleInputPassword1">Price Range in USD:</label>
-                          <br>
-                          <label for="startingPrice">From</label>
-                          <input type="number" class="form-control" id="startingPrice" placeholder="100" data-bind="value: PriceFrom">
-                          <label for="endingPrice">To</label>
-                          <input type="number" class="form-control" id="endingPrice" placeholder="200" data-bind="value: PriceTo">
-                      </div>
-                      <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
-                  </form>
-              </div>
-
-              <!-- Column which represents the data being presented upon searching -->
-              <div class="col-md-9 col-lg-9">
-                  <table class="table table-striped table-bordered table-hover">
-                      <thead class="thead-dark">
-                          <tr>
-                              <th scope="col">Flight Number</th>
-                              <th scope="col">Price</th>
-                              <th scope="col">Location</th>
-                              <th scope="col">Destination</th>
-                              <th scope="col">Departure Date</th>
-                              <th scope="col">Arrival Date</th>
-                              <th scope="col">Action</th>
-                          </tr>
-                      </thead>
-                      <tbody data-bind="foreach: flights">
-                      <td data-bind="text: FlightNumber"></td>
-                      <td data-bind="text: Price"></td>
-                      <td data-bind="text: Location"></td>
-                      <td data-bind="text: Destination"></td>
-                      <td data-bind="text: DepartureDate"></td>
-                      <td data-bind="text: ArrivalDate"></td>
-                      <td><button type="button" class="btn btn-primary" data-bind="click: registerForFlight">Purchase</button></td>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
       </div>
 
 
