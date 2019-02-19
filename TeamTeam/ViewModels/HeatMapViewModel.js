@@ -24,6 +24,8 @@ var HeatMapViewModel = function() {
             }
         });
     }
+
+
 };
 
 //binding the viewmodel to the view
