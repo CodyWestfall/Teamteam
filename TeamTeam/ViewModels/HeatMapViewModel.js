@@ -20,35 +20,47 @@ var HeatMapViewModel = function() {
 
     //function used when submit button is clicked
     self.submit = function () {
-        self.value1(Math.floor(Math.random() * 20 + self.min()));
-        self.value2(Math.floor(Math.random() * 20 + self.min()));
-        self.value3(Math.floor(Math.random() * 20 + self.min()));
-        self.value4(Math.floor(Math.random() * 20 + self.min()));
-        self.value5(Math.floor(Math.random() * 20 + self.min()));
-        self.value6(Math.floor(Math.random() * 20 + self.min()));
+        if (self.selectedUnit() == "Fahrenheit") {
+            self.value1(Math.floor(Math.random() * 20 + self.min()));
+            self.value2(Math.floor(Math.random() * 20 + self.min()));
+            self.value3(Math.floor(Math.random() * 20 + self.min()));
+            self.value4(Math.floor(Math.random() * 20 + self.min()));
+            self.value5(Math.floor(Math.random() * 20 + self.min()));
+            self.value6(Math.floor(Math.random() * 20 + self.min()));
+        }
+        if (self.selectedUnit() == "Celsius") {
+            self.value1(Math.floor(Math.random() * (26.67 - 15.56) + self.min()));
+            self.value2(Math.floor(Math.random() * (26.67 - 15.56) + self.min()));
+            self.value3(Math.floor(Math.random() * (26.67 - 15.56) + self.min()));
+            self.value4(Math.floor(Math.random() * (26.67 - 15.56) + self.min()));
+            self.value5(Math.floor(Math.random() * (26.67 - 15.56) + self.min()));
+            self.value6(Math.floor(Math.random() * (26.67 - 15.56) + self.min()));   
+        }
         initialize();
     }
 
-    self.selectedUnit.subscribe(function (newValue, oldValue) {
-        if (newValue == "Celsius" && oldValue == "Fahrenheit") {
-            self.value1((self.value1() - 32) * 5 / 9);
-            self.value2((self.value2() - 32) * 5 / 9);
-            self.value3((self.value3() - 32) * 5 / 9);
-            self.value4((self.value4() - 32) * 5 / 9);
-            self.value5((self.value5() - 32) * 5 / 9);
-            self.value6((self.value6() - 32) * 5 / 9);
+    self.selectedUnit.subscribe(function (newValue) {
+        if (newValue == "Celsius") {
             self.min(15.56);
             self.max(26.67);
+            self.value1(Math.round((self.value1() - 32) * 5 / 9 * 100) / 100);
+            self.value2(Math.round((self.value2() - 32) * 5 / 9 * 100) / 100);
+            self.value3(Math.round((self.value3() - 32) * 5 / 9 * 100) / 100);
+            self.value4(Math.round((self.value4() - 32) * 5 / 9 * 100) / 100);
+            self.value5(Math.round((self.value5() - 32) * 5 / 9 * 100) / 100);
+            self.value6(Math.round((self.value6() - 32) * 5 / 9 * 100) / 100);
+            
         }
-        if (newValue == "Fahrenheit" && oldValue == "Celsius") {
-            self.value1(self.value1() * 9 / 5 + 32);
-            self.value2(self.value2() * 9 / 5 + 32);
-            self.value3(self.value3() * 9 / 5 + 32);
-            self.value4(self.value4() * 9 / 5 + 32);
-            self.value5(self.value5() * 9 / 5 + 32);
-            self.value6(self.value6() * 9 / 5 + 32);
+        if (newValue == "Fahrenheit") {
             self.min(60);
             self.max(80);
+            self.value1(Math.round((self.value1() * 9 / 5 + 32) * 100) / 100);
+            self.value2(Math.round((self.value2() * 9 / 5 + 32) * 100) / 100);
+            self.value3(Math.round((self.value3() * 9 / 5 + 32) * 100) / 100);
+            self.value4(Math.round((self.value4() * 9 / 5 + 32) * 100) / 100);
+            self.value5(Math.round((self.value5() * 9 / 5 + 32) * 100) / 100);
+            self.value6(Math.round((self.value6() * 9 / 5 + 32) * 100) / 100);
+            
         }
     });
 
@@ -182,13 +194,7 @@ var HeatMapViewModel = function() {
                 }
             ]
         });
-
-
-        self.heatmap.setDataMax(77);
-        self.heatmap.setDataMin(61);
-
-
-        
+       
     }
 
     initialize();
