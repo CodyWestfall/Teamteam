@@ -1,6 +1,9 @@
 heatmap.js documentation
 https://www.patrick-wied.at/static/heatmapjs/docs.html
 
+Public domain
+http://www.roomtemp.net/
+
 Apache Overview
 http://192.168.1.28:3000/d/PzdckvYmz/apache-overview?orgId=1&from=1550539136935&to=1550539158751
 
