@@ -1,5 +1,5 @@
 //the view model
-var SearchForFlightsViewModel = function() {
+var HeatMapViewModel = function() {
     self = this;
 
 
@@ -28,4 +28,4 @@ var SearchForFlightsViewModel = function() {
 };
 
 //binding the viewmodel to the view
-ko.applyBindings(new SearchForFlightsViewModel());
+ko.applyBindings(new HeatMapViewModel());

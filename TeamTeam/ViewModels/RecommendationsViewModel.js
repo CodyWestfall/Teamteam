@@ -1,5 +1,5 @@
-//ViewModel for LookupMyTicket
-var LookupMyTicketViewModel = function() {
+//ViewModel for Recommendations
+var RecommendationsViewModel = function() {
     self = this;
     //inputs
     self.inputName = ko.observable("");
@@ -38,4 +38,4 @@ var LookupMyTicketViewModel = function() {
 
 };
 
-ko.applyBindings(new LookupMyTicketViewModel());
+ko.applyBindings(new RecommendationsViewModel());

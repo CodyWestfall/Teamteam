@@ -5,10 +5,10 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TeamTeam", "TeamTeam", "{192AFFDF-44F3-4A94-9657-F100C375ED3B}"
 	ProjectSection(SolutionItems) = preProject
+		TeamTeam\HeatMap.html = TeamTeam\HeatMap.html
 		TeamTeam\index.html = TeamTeam\index.html
-		TeamTeam\LookupMyTicket.html = TeamTeam\LookupMyTicket.html
 		README.txt = README.txt
-		TeamTeam\SearchForFlights.html = TeamTeam\SearchForFlights.html
+		TeamTeam\Recommendations.html = TeamTeam\Recommendations.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "css", "css", "{7204FF11-BFC5-41E0-82DC-5130102CB9F7}"
@@ -25,8 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{E5643B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModels", "ViewModels", "{360068AF-A934-4353-8677-683ABA572C11}"
 	ProjectSection(SolutionItems) = preProject
-		TeamTeam\ViewModels\LookupMyTicketViewModel.js = TeamTeam\ViewModels\LookupMyTicketViewModel.js
-		TeamTeam\ViewModels\SearchForFlightsViewModel.js = TeamTeam\ViewModels\SearchForFlightsViewModel.js
+		TeamTeam\ViewModels\HeatMapViewModel.js = TeamTeam\ViewModels\HeatMapViewModel.js
+		TeamTeam\ViewModels\RecommendationsViewModel.js = TeamTeam\ViewModels\RecommendationsViewModel.js
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{054CDB89-AE86-4B35-A824-5C6435E690F6}"
