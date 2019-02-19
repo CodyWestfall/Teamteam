@@ -4,6 +4,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TeamTeam", "TeamTeam", "{192AFFDF-44F3-4A94-9657-F100C375ED3B}"
+	ProjectSection(SolutionItems) = preProject
+		TeamTeam\index.html = TeamTeam\index.html
+		TeamTeam\LookupMyTicket.html = TeamTeam\LookupMyTicket.html
+		TeamTeam\SearchForFlights.html = TeamTeam\SearchForFlights.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "css", "css", "{7204FF11-BFC5-41E0-82DC-5130102CB9F7}"
+	ProjectSection(SolutionItems) = preProject
+		TeamTeam\css\bootstrap.min.css = TeamTeam\css\bootstrap.min.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{056B731B-1C80-4EB2-B951-6D3B322A7EF4}"
+	ProjectSection(SolutionItems) = preProject
+		TeamTeam\Images\stripes_light.png = TeamTeam\Images\stripes_light.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{E5643B74-4A52-47F3-88F8-68DF70A8E489}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModels", "ViewModels", "{360068AF-A934-4353-8677-683ABA572C11}"
+	ProjectSection(SolutionItems) = preProject
+		TeamTeam\ViewModels\LookupMyTicketViewModel.js = TeamTeam\ViewModels\LookupMyTicketViewModel.js
+		TeamTeam\ViewModels\SearchForFlightsViewModel.js = TeamTeam\ViewModels\SearchForFlightsViewModel.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{054CDB89-AE86-4B35-A824-5C6435E690F6}"
+	ProjectSection(SolutionItems) = preProject
+		TeamTeam\Scripts\bootstrap.min.js = TeamTeam\Scripts\bootstrap.min.js
+		TeamTeam\Scripts\jquery-3.3.1.min.js = TeamTeam\Scripts\jquery-3.3.1.min.js
+		TeamTeam\Scripts\knockout-3.4.2.js = TeamTeam\Scripts\knockout-3.4.2.js
+		TeamTeam\Scripts\popper.min.js = TeamTeam\Scripts\popper.min.js
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +65,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7204FF11-BFC5-41E0-82DC-5130102CB9F7} = {192AFFDF-44F3-4A94-9657-F100C375ED3B}
+		{056B731B-1C80-4EB2-B951-6D3B322A7EF4} = {192AFFDF-44F3-4A94-9657-F100C375ED3B}
+		{E5643B74-4A52-47F3-88F8-68DF70A8E489} = {192AFFDF-44F3-4A94-9657-F100C375ED3B}
+		{360068AF-A934-4353-8677-683ABA572C11} = {192AFFDF-44F3-4A94-9657-F100C375ED3B}
+		{054CDB89-AE86-4B35-A824-5C6435E690F6} = {192AFFDF-44F3-4A94-9657-F100C375ED3B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B1CB7713-F00A-4B8B-A741-A30C5076116B}
