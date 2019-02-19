@@ -1,9 +1,3 @@
-// importing the FlightModel
-var imported = document.createElement('script');
-imported.src = '../Models/FlightModel.js';
-document.head.appendChild(imported);
-
-
 //the view model
 var SearchForFlightsViewModel = function() {
     self = this;

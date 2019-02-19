@@ -1,8 +1,3 @@
-// Importing the TicketModel
-var imported = document.createElement('script');
-imported.src = '../Models/TicketModel.js';
-document.head.appendChild(imported);
-
 //ViewModel for LookupMyTicket
 var LookupMyTicketViewModel = function() {
     self = this;
