@@ -13,8 +13,11 @@
     <title>Heat Maps</title>
     <style>
         #heatmapContainer {
-            width: 600px;
-            height: 400px;
+            position: absolute;
+            left: calc(50% - 225px);
+            top: 0;
+            width: 450px;
+            height: 300px;
             border: 5px solid black;
             overflow: hidden;
         }
@@ -53,10 +56,8 @@
     <br />
 
     <!-- Content of page -->
-    <div class="container">
-        <div id="heatmapContainer" class="text-center center-block">
-            <!--HEATMAP CANVAS GOES HERE-->
-        </div>
+    <div id="heatmapContainer">
+    <!--HEATMAP CANVAS GOES HERE-->
     </div>
 
 
