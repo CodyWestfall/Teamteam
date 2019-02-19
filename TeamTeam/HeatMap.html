@@ -68,11 +68,75 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12 col-lg-12 col-sm-12 text-center">
-            <label>Value 1</label>
-            <input href="#" type="text" class="form center-block" data-bind="click: value1()"/>
+    <br />
+
+    <div class="text-center">
+        <label for="Celsius">Celsius</label>
+        <input class="form text-center" type="radio" name="unit" id="Celsius" value="Celsius" data-bind="checked: selectedUnit" />
+
+        <label for="Fahrenheit">Fahrenheit</label>
+        <input class="form text-center" " type="radio" checked name="unit" id="Fahrenheit" value="Fahrenheit" data-bind="checked: selectedUnit" />
+    </div>
+
+    <br />
+    <div class="form">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                <label>Value 1</label>
+                <input type="number" class="form center-block" data-bind="value: value1" />
+            </div>
         </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                <label>Value 2</label>
+                <input type="number" class="form center-block" data-bind="value: value2" />
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                <label>Value 3</label>
+                <input type="number" class="form center-block" data-bind="value: value3" />
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                <label>Value 4</label>
+                <input type="number" class="form center-block" data-bind="value: value4" />
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                <label>Value 5</label>
+                <input type="number" class="form center-block" data-bind="value: value5" />
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+                <label>Value 6</label>
+                <input type="number" class="form center-block" data-bind="value: value6" />
+            </div>
+        </div>
+
+        <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+            <button type="submit" class="btn btn-primary btn-lg center-block">Enter</button>
+        </div>
+
+
     </div>
 
     <!-- Scripts -->
