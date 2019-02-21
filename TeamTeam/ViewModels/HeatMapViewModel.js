@@ -9,6 +9,9 @@ var HeatMapViewModel = function() {
     self.min = ko.observable(60);
     self.max = ko.observable(80);
 
+    self.result = ko.observable();
+    self.temp = ko.observable(-1);
+
     self.selectedUnit = ko.observable("Fahrenheit");
 
     self.value1 = ko.observable(Math.floor(Math.random() * 20 + self.min()));
@@ -119,19 +122,19 @@ var HeatMapViewModel = function() {
     });
 
 
-    self.submitPostSurvey = function () {
+    self.searchTemp = function () {
 
-        var url = window.location.origin +
-            "/api/Vue/CreateVueSurvey";
+        var url = 'http://influx.roomtemp.net:8086/query?db=servicedashboard&q=SELECT+tempc+FROM+temperature,host+WHERE+time+%3E+1550787500s+GROUP+BY+host';
 
         $.ajax({
             url: url,
             dataType: "json",
             success: function (data) {
-
+                self.result(data);
+                self.temp(self.result().results[0].series[0].values[0][1]);
                 },
             error: function (data) {
-                self.submit();
+                self.result(data);
             }
         });
     }

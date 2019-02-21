@@ -32,4 +32,14 @@ vpn.tehhax.com
 root
 @jj@1TP3
 
-the
+influxDB user
+capstone
+xp7Vq$8q
+
+http://influx.roomtemp.net:8086/query?db=servicedashboard&q=SELECT+tempc+FROM+temperature+WHERE+time+%3E+1443610329s
+
+
+Year = 31557600s
+
+
+http://influx.roomtemp.net:8086/query?db=servicedashboard&q=SELECT+tempc+FROM+temperature,host+WHERE+time+%3E+1550787500s+GROUP+BY+host
