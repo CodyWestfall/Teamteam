@@ -124,7 +124,7 @@ var HeatMapViewModel = function() {
 
     self.searchTemp = function () {
 
-        var url = 'http://influx.roomtemp.net:8086/query?db=servicedashboard&q=SELECT+tempc+FROM+temperature,host+WHERE+time+%3E+1550787500s+GROUP+BY+host';
+        var url = 'https://influx.roomtemp.net:8086/query?db=servicedashboard&q=SELECT+tempc+FROM+temperature,host+WHERE+time+%3E+1550787500s+GROUP+BY+host';
 
         $.ajax({
             url: url,
