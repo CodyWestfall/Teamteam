@@ -117,7 +117,26 @@ var HeatMapViewModel = function() {
         self.day(currentDate.getUTCDate());
         self.hour(currentDate.getUTCHours());
         self.minute(currentDate.getUTCMinutes());
-        self.second(currentDate.getUTCSeconds()-2);
+        self.second(currentDate.getUTCSeconds());
+
+        if (self.second() < 10) {
+            self.second(50 + self.second());
+            if (self.minute() == 0) {
+                self.minute(59);
+                if (self.hour() == 0) {
+                    self.hour(23);
+                }
+                else {
+                    self.hour(self.hour() - 1)
+                }
+            }
+            else {
+                self.minute(self.minute() - 1);
+            }
+        }
+        else {
+            self.second(self.second()-10)
+        }
 
         if (self.second().toString().length == 1)
             self.second('0' + self.second());
@@ -155,6 +174,21 @@ var HeatMapViewModel = function() {
             success: function (data) {
                 self.result(data);
                 self.temp(self.result().results[0].series[0].values[0][1]);
+
+                for (i = 0; i < self.result().results[0].series.length; i++) {
+                    if (self.result().results[0].series[i].tags.host == 'tempNode1')
+                        self.tempNode1(self.result().results[0].series[i].values[0][1])
+                    if (self.result().results[0].series[i].tags.host == 'tempNode2')
+                        self.tempNode2(self.result().results[0].series[i].values[0][1])
+                    if (self.result().results[0].series[i].tags.host == 'tempNode3')
+                        self.tempNode3(self.result().results[0].series[i].values[0][1])
+                    if (self.result().results[0].series[i].tags.host == 'tempNode4')
+                        self.tempNode4(self.result().results[0].series[i].values[0][1])
+                    if (self.result().results[0].series[i].tags.host == 'tempNode5')
+                        self.tempNode5(self.result().results[0].series[i].values[0][1])
+                    if (self.result().results[0].series[i].tags.host == 'tempNode6')
+                        self.tempNode6(self.result().results[0].series[i].values[0][1])
+                }
                 },
             error: function (data) {
                 self.result(data);
