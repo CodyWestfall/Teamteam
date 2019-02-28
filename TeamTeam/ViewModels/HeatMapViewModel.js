@@ -2,15 +2,33 @@
 var HeatMapViewModel = function() {
     self = this;
 
+    //time variables
+    self.year = ko.observable('');
+    self.month = ko.observable('');
+    self.day = ko.observable('');
+    self.hour = ko.observable('');
+    self.minute = ko.observable('');
+    self.second = ko.observable('');
+
     self.width = ko.observable(450);
     self.height = ko.observable(300);
     self.radius = ko.observable(200);
+
+    self.url = ko.observable();
 
     self.min = ko.observable(60);
     self.max = ko.observable(80);
 
     self.result = ko.observable();
     self.temp = ko.observable(-1);
+
+    //node values
+    self.tempNode1 = ko.observable();
+    self.tempNode2 = ko.observable();
+    self.tempNode3 = ko.observable();
+    self.tempNode4 = ko.observable();
+    self.tempNode5 = ko.observable();
+    self.tempNode6 = ko.observable();
 
     self.selectedUnit = ko.observable("Fahrenheit");
 
@@ -66,68 +84,73 @@ var HeatMapViewModel = function() {
             
         }
     });
-
+    
     self.value1.subscribe(function (newValue) {
-        if (newValue > self.max())
-            self.value1(self.max());
-        if (newValue < self.min())
-            self.value1(self.min());
-        if (newValue >= self.min() && newValue <= self.max())
-            initialize();
+        initialize();
     });
 
     self.value2.subscribe(function (newValue) {
-        if (newValue > self.max())
-            self.value2(self.max());
-        if (newValue < self.min())
-            self.value2(self.min());
-        if (newValue >= self.min() && newValue <= self.max())
-            initialize();
+        initialize();
     });
 
     self.value3.subscribe(function (newValue) {
-        if (newValue > self.max())
-            self.value3(self.max());
-        if (newValue < self.min())
-            self.value3(self.min());
-        if (newValue >= self.min() && newValue <= self.max())
-            initialize();
+        initialize();
     });
 
     self.value4.subscribe(function (newValue) {
-        if (newValue > self.max())
-            self.value4(self.max());
-        if (newValue < self.min())
-            self.value4(self.min());
-        if (newValue >= self.min() && newValue <= self.max())
-            initialize();
+         initialize();
     });
 
     self.value5.subscribe(function (newValue) {
-        if (newValue > self.max())
-            self.value5(self.max());
-        if (newValue < self.min())
-            self.value5(self.min());
-        if (newValue >= self.min() && newValue <= self.max())
-            initialize();
+        initialize();
     });
 
     self.value6.subscribe(function (newValue) {
-        if (newValue > self.max())
-            self.value1(self.max());
-        if (newValue < self.min())
-            self.value1(self.min());
-        if (newValue >= self.min() && newValue <= self.max())
-            initialize();
+          initialize();
     });
-
+    
 
     self.searchTemp = function () {
+        var currentDate = new Date();
+        self.year(currentDate.getUTCFullYear());
+        self.month(currentDate.getUTCMonth()+1);
+        self.day(currentDate.getUTCDate());
+        self.hour(currentDate.getUTCHours());
+        self.minute(currentDate.getUTCMinutes());
+        self.second(currentDate.getUTCSeconds()-2);
 
-        var url = 'https://influx.roomtemp.net:8086/query?db=servicedashboard&q=SELECT+tempc+FROM+temperature,host+WHERE+time+%3E+1550787500s+GROUP+BY+host';
+        if (self.second().toString().length == 1)
+            self.second('0' + self.second());
+
+        if (self.minute().toString().length == 1)
+            self.minute('0' + self.minute());
+
+        if (self.hour().toString().length == 1)
+            self.hour('0' + self.hour());
+
+        if (self.day().toString().length == 1)
+            self.day('0' + self.day());
+
+        if (self.month().toString().length == 1)
+            self.month('0' + self.month());
+
+        self.url('https://influx.roomtemp.net:8086/query?db=servicedashboard&q=SELECT+tempc+FROM+temperature,host+WHERE+time+%3E+' + 
+            '%27' +
+            self.year().toString() +
+            '-' +
+            self.month().toString() +
+            '-' +
+            self.day().toString() + //date
+            'T' +
+            self.hour().toString() + //hour
+            '%3A' +
+            self.minute().toString() + //minute
+            '%3A' +
+            self.second().toString() +
+            '.000000000Z%27+GROUP+BY+host');
 
         $.ajax({
-            url: url,
+            url: self.url(),
             dataType: "json",
             success: function (data) {
                 self.result(data);
