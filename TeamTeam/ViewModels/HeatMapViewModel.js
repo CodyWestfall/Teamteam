@@ -20,15 +20,14 @@ var HeatMapViewModel = function() {
     self.max = ko.observable(80);
 
     self.result = ko.observable();
-    self.temp = ko.observable(-1);
 
     //node values
-    self.tempNode1 = ko.observable();
-    self.tempNode2 = ko.observable();
-    self.tempNode3 = ko.observable();
-    self.tempNode4 = ko.observable();
-    self.tempNode5 = ko.observable();
-    self.tempNode6 = ko.observable();
+    self.tempNode1 = ko.observable(0);
+    self.tempNode2 = ko.observable(0);
+    self.tempNode3 = ko.observable(0);
+    self.tempNode4 = ko.observable(0);
+    self.tempNode5 = ko.observable(0);
+    self.tempNode6 = ko.observable(0);
 
     self.selectedUnit = ko.observable("Fahrenheit");
 
@@ -70,6 +69,12 @@ var HeatMapViewModel = function() {
             self.value4(Math.round((self.value4() - 32) * 5 / 9 * 100) / 100);
             self.value5(Math.round((self.value5() - 32) * 5 / 9 * 100) / 100);
             self.value6(Math.round((self.value6() - 32) * 5 / 9 * 100) / 100);
+            self.tempNode1(Math.round((self.tempNode1() - 32) * 5 / 9 * 100) / 100);
+            self.tempNode2(Math.round((self.tempNode2() - 32) * 5 / 9 * 100) / 100);
+            self.tempNode3(Math.round((self.tempNode3() - 32) * 5 / 9 * 100) / 100);
+            self.tempNode4(Math.round((self.tempNode4() - 32) * 5 / 9 * 100) / 100);
+            self.tempNode5(Math.round((self.tempNode5() - 32) * 5 / 9 * 100) / 100);
+            self.tempNode6(Math.round((self.tempNode6() - 32) * 5 / 9 * 100) / 100);
             
         }
         if (newValue == "Fahrenheit") {
@@ -81,6 +86,12 @@ var HeatMapViewModel = function() {
             self.value4(Math.round((self.value4() * 9 / 5 + 32) * 100) / 100);
             self.value5(Math.round((self.value5() * 9 / 5 + 32) * 100) / 100);
             self.value6(Math.round((self.value6() * 9 / 5 + 32) * 100) / 100);
+            self.tempNode1(Math.round((self.tempNode1() * 9 / 5 + 32) * 100) / 100);
+            self.tempNode2(Math.round((self.tempNode2() * 9 / 5 + 32) * 100) / 100);
+            self.tempNode3(Math.round((self.tempNode3() * 9 / 5 + 32) * 100) / 100);
+            self.tempNode4(Math.round((self.tempNode4() * 9 / 5 + 32) * 100) / 100);
+            self.tempNode5(Math.round((self.tempNode5() * 9 / 5 + 32) * 100) / 100);
+            self.tempNode6(Math.round((self.tempNode6() * 9 / 5 + 32) * 100) / 100);
             
         }
     });
@@ -173,22 +184,41 @@ var HeatMapViewModel = function() {
             dataType: "json",
             success: function (data) {
                 self.result(data);
-                self.temp(self.result().results[0].series[0].values[0][1]);
+                //self.temp(self.result().results[0].series[0].values[0][1]);
 
-                for (i = 0; i < self.result().results[0].series.length; i++) {
-                    if (self.result().results[0].series[i].tags.host == 'tempNode1')
-                        self.tempNode1(self.result().results[0].series[i].values[0][1])
-                    if (self.result().results[0].series[i].tags.host == 'tempNode2')
-                        self.tempNode2(self.result().results[0].series[i].values[0][1])
-                    if (self.result().results[0].series[i].tags.host == 'tempNode3')
-                        self.tempNode3(self.result().results[0].series[i].values[0][1])
-                    if (self.result().results[0].series[i].tags.host == 'tempNode4')
-                        self.tempNode4(self.result().results[0].series[i].values[0][1])
-                    if (self.result().results[0].series[i].tags.host == 'tempNode5')
-                        self.tempNode5(self.result().results[0].series[i].values[0][1])
-                    if (self.result().results[0].series[i].tags.host == 'tempNode6')
-                        self.tempNode6(self.result().results[0].series[i].values[0][1])
+                if (self.selectedUnit() == "Celsius") {
+                    for (i = 0; i < self.result().results[0].series.length; i++) {
+                        if (self.result().results[0].series[i].tags.host == 'tempNode1')
+                            self.tempNode1(self.result().results[0].series[i].values[0][1])
+                        if (self.result().results[0].series[i].tags.host == 'tempNode2')
+                            self.tempNode2(self.result().results[0].series[i].values[0][1])
+                        if (self.result().results[0].series[i].tags.host == 'tempNode3')
+                            self.tempNode3(self.result().results[0].series[i].values[0][1])
+                        if (self.result().results[0].series[i].tags.host == 'tempNode4')
+                            self.tempNode4(self.result().results[0].series[i].values[0][1])
+                        if (self.result().results[0].series[i].tags.host == 'tempNode5')
+                            self.tempNode5(self.result().results[0].series[i].values[0][1])
+                        if (self.result().results[0].series[i].tags.host == 'tempNode6')
+                            self.tempNode6(self.result().results[0].series[i].values[0][1])
+                    }
                 }
+                else {
+                    for (i = 0; i < self.result().results[0].series.length; i++) {
+                        if (self.result().results[0].series[i].tags.host == 'tempNode1')
+                            self.tempNode1(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
+                        if (self.result().results[0].series[i].tags.host == 'tempNode2')
+                            self.tempNode2(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
+                        if (self.result().results[0].series[i].tags.host == 'tempNode3')
+                            self.tempNode3(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
+                        if (self.result().results[0].series[i].tags.host == 'tempNode4')
+                            self.tempNode4(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
+                        if (self.result().results[0].series[i].tags.host == 'tempNode5')
+                            self.tempNode5(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
+                        if (self.result().results[0].series[i].tags.host == 'tempNode6')
+                            self.tempNode6(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
+                    }
+                }
+
                 },
             error: function (data) {
                 self.result(data);
@@ -254,7 +284,7 @@ var HeatMapViewModel = function() {
                 }
             ]
         });
-       
+        self.searchTemp();
     }
 
     initialize();
