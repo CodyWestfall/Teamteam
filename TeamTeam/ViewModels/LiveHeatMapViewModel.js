@@ -12,7 +12,7 @@ var LiveHeatMapViewModel = function() {
 
     self.width = ko.observable(1024);
     self.height = ko.observable(720);
-    self.radius = ko.observable(400);
+    self.radius = ko.observable(550);
 
     self.url = ko.observable();
 
@@ -190,39 +190,39 @@ var LiveHeatMapViewModel = function() {
             max: self.max(),
             data: [
                 {//Node 1
-                    x: self.width() / 8,
-                    y: self.height() / 4,
+                    x: self.width() / 16,
+                    y: self.height() / 8,
                     value: self.tempNode1(),
                     radius: self.radius()
 
                 },
                 {//Node 2
                     x: self.width() / 2,
-                    y: self.height() / 4,
+                    y: self.height() / 8,
                     value: self.tempNode2(),
                     radius: self.radius()
                 },
                 {//Node 3
-                    x: self.width() / 8 * 7,
-                    y: self.height() / 4,
+                    x: self.width() / 16 * 15,
+                    y: self.height() / 8,
                     value: self.tempNode3(),
                     radius: self.radius()
                 },
                 {//Node 4
-                    x: self.width() / 8,
-                    y: self.height() / 4 * 3,
+                    x: self.width() / 16,
+                    y: self.height() / 8 * 7,
                     value: self.tempNode4(),
                     radius: self.radius()
                 },
                 {//Node 5
                     x: self.width() / 2,
-                    y: self.height() / 4 * 3,
+                    y: self.height() / 8 * 7,
                     value: self.tempNode5(),
                     radius: self.radius()
                 },
                 {//Node 6
-                    x: self.width() / 8 * 7,
-                    y: self.height() / 4 * 3,
+                    x: self.width() / 16 * 15,
+                    y: self.height() / 8 * 7,
                     value: self.tempNode6(),
                     radius: self.radius()
                 }
