@@ -17,7 +17,7 @@ var HeatMapViewModel = function() {
     self.url = ko.observable();
 
     self.min = ko.observable(60);
-    self.max = ko.observable(90);
+    self.max = ko.observable(85);
 
     self.result = ko.observable();
 
@@ -62,7 +62,7 @@ var HeatMapViewModel = function() {
     self.selectedUnit.subscribe(function (newValue) {
         if (newValue == "Celsius") {
             self.min(15.56);
-            self.max(32.22);
+            self.max(29.4);
             self.value1(Math.round((self.value1() - 32) * 5 / 9 * 100) / 100);
             self.value2(Math.round((self.value2() - 32) * 5 / 9 * 100) / 100);
             self.value3(Math.round((self.value3() - 32) * 5 / 9 * 100) / 100);
@@ -79,7 +79,7 @@ var HeatMapViewModel = function() {
         }
         if (newValue == "Fahrenheit") {
             self.min(60);
-            self.max(90);
+            self.max(85);
             self.value1(Math.round((self.value1() * 9 / 5 + 32) * 100) / 100);
             self.value2(Math.round((self.value2() * 9 / 5 + 32) * 100) / 100);
             self.value3(Math.round((self.value3() * 9 / 5 + 32) * 100) / 100);

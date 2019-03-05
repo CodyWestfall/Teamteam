@@ -14,10 +14,10 @@
     <style>
         #heatmapContainer {
             position: absolute;
-            left: calc(50% - 225px);
+            left: calc(50% - 512px);
             top: 0;
-            width: 450px;
-            height: 300px;
+            width: 1024px;
+            height: 720px;
             border: 5px solid black;
             overflow: hidden;
         }
@@ -29,7 +29,7 @@
 </head>
 
 
-<body background="#">
+<body style="background-color:dimgrey;">
 
 
     <!-- NavBar -->
@@ -63,10 +63,10 @@
     <br />
 
     <div class="text-center">
-        <label for="Celsius">Celsius</label>
+        <label style="color:black" for="Celsius">Celsius</label>
         <input class="form text-center" type="radio" name="unit" id="Celsius" value="Celsius" data-bind="checked: selectedUnit" />
 
-        <label for="Fahrenheit">Fahrenheit</label>
+        <label style="color:black" for="Fahrenheit">Fahrenheit</label>
         <input class="form text-center" type="radio" checked name="unit" id="Fahrenheit" value="Fahrenheit" data-bind="checked: selectedUnit" />
     </div>
 
@@ -74,58 +74,45 @@
     <div class="form">
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 text-center">
-                <label>Value 1</label>
-                <input type="number" class="form center-block" data-bind="value: tempNode1" />
+                <label style="color:black">Node 1</label>
+                <input disabled type="number" class="form center-block" data-bind="value: tempNode1, style: { color: ((tempNode1() > 85 && selectedUnit() == 'Fahrenheit') || (tempNode1() > 29 && selectedUnit() == 'Celsius')) ? 'red' : 'black' }" />
+                <span style="color: red;" data-bind="visible: ((tempNode1() > 85 && selectedUnit() == 'Fahrenheit') || (tempNode1() > 29 && selectedUnit() == 'Celsius'))">2 Spicy 5 me</span>
             </div>
         </div>
-
-        <br />
 
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 text-center">
-                <label>Value 2</label>
-                <input type="number" class="form center-block" data-bind="value: tempNode2" />
+                <label style="color:black">Node 2</label>
+                <input disabled type="number" class="form center-block" data-bind="value: tempNode2, style: { color: ((tempNode2() > 85 && selectedUnit() == 'Fahrenheit') || (tempNode2() > 29 && selectedUnit() == 'Celsius')) ? 'red' : 'black' }" />
             </div>
         </div>
-
-        <br />
 
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 text-center">
-                <label>Value 3</label>
-                <input type="number" class="form center-block" data-bind="value: tempNode3" />
+                <label style="color:black">Node 3</label>
+                <input disabled type="number" class="form center-block" data-bind="value: tempNode3, style: { color: ((tempNode3() > 85 && selectedUnit() == 'Fahrenheit') || (tempNode3() > 29 && selectedUnit() == 'Celsius')) ? 'red' : 'black' }" />
             </div>
         </div>
-
-        <br />
 
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 text-center">
-                <label>Value 4</label>
-                <input type="number" class="form center-block" data-bind="value: tempNode4" />
+                <label style="color:black">Node 4</label>
+                <input disabled type="number" class="form center-block" data-bind="value: tempNode4, style: { color: ((tempNode4() > 85 && selectedUnit() == 'Fahrenheit') || (tempNode4() > 29 && selectedUnit() == 'Celsius')) ? 'red' : 'black' }" />
             </div>
         </div>
-
-        <br />
 
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 text-center">
-                <label>Value 5</label>
-                <input type="number" class="form center-block" data-bind="value: tempNode5" />
+                <label style="color:black">Node 5</label>
+                <input disabled type="number" class="form center-block" data-bind="value: tempNode5, style: { color: ((tempNode5() > 85 && selectedUnit() == 'Fahrenheit') || (tempNode5() > 29 && selectedUnit() == 'Celsius')) ? 'red' : 'black' }" />
             </div>
         </div>
-
-        <br />
 
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 text-center">
-                <label>Value 6</label>
-                <input type="number" class="form center-block" data-bind="value: tempNode6" />
+                <label style="color:black">Node 6</label>
+                <input disabled type="number" class="form center-block" data-bind="value: tempNode6, style: { color: ((tempNode6() > 85 && selectedUnit() == 'Fahrenheit') || (tempNode6() > 29 && selectedUnit() == 'Celsius')) ? 'red' : 'black' }" />
             </div>
-        </div>
-
-        <div class="col-md-12 col-lg-12 col-sm-12 text-center">
-            <button type="submit" class="btn btn-primary btn-lg center-block" data-bind="click: searchTemp()">Enter</button>
         </div>
 
     </div>

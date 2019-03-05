@@ -10,14 +10,14 @@ var LiveHeatMapViewModel = function() {
     self.minute = ko.observable('');
     self.second = ko.observable('');
 
-    self.width = ko.observable(450);
-    self.height = ko.observable(300);
-    self.radius = ko.observable(200);
+    self.width = ko.observable(1024);
+    self.height = ko.observable(720);
+    self.radius = ko.observable(400);
 
     self.url = ko.observable();
 
     self.min = ko.observable(60);
-    self.max = ko.observable(90);
+    self.max = ko.observable(85);
 
     self.result = ko.observable();
 
@@ -34,7 +34,7 @@ var LiveHeatMapViewModel = function() {
     self.selectedUnit.subscribe(function (newValue) {
         if (newValue == "Celsius") {
             self.min(15.56);
-            self.max(32.22);
+            self.max(29.4);
             self.tempNode1(Math.round((self.tempNode1() - 32) * 5 / 9 * 100) / 100);
             self.tempNode2(Math.round((self.tempNode2() - 32) * 5 / 9 * 100) / 100);
             self.tempNode3(Math.round((self.tempNode3() - 32) * 5 / 9 * 100) / 100);
@@ -44,7 +44,7 @@ var LiveHeatMapViewModel = function() {
         }
         if (newValue == "Fahrenheit") {
             self.min(60);
-            self.max(90);
+            self.max(85);
             self.tempNode1(Math.round((self.tempNode1() * 9 / 5 + 32) * 100) / 100);
             self.tempNode2(Math.round((self.tempNode2() * 9 / 5 + 32) * 100) / 100);
             self.tempNode3(Math.round((self.tempNode3() * 9 / 5 + 32) * 100) / 100);
