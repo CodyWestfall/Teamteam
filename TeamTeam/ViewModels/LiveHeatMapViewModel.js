@@ -81,7 +81,7 @@ var LiveHeatMapViewModel = function() {
 
     self.searchTemp = function () {
         var currentDate = new Date();
-        currentDate.setSeconds(currentDate.getSeconds() - 20);
+        currentDate.setSeconds(currentDate.getSeconds() - 60);
 
         self.year(currentDate.getUTCFullYear());
         self.month(currentDate.getUTCMonth()+1);
