@@ -123,6 +123,8 @@ var HeatMapViewModel = function() {
 
     self.searchTemp = function () {
         var currentDate = new Date();
+        currentDate.setSeconds(currentDate.getSeconds() - 20);
+
         self.year(currentDate.getUTCFullYear());
         self.month(currentDate.getUTCMonth()+1);
         self.day(currentDate.getUTCDate());
@@ -130,24 +132,6 @@ var HeatMapViewModel = function() {
         self.minute(currentDate.getUTCMinutes());
         self.second(currentDate.getUTCSeconds());
 
-        if (self.second() < 10) {
-            self.second(50 + self.second());
-            if (self.minute() == 0) {
-                self.minute(59);
-                if (self.hour() == 0) {
-                    self.hour(23);
-                }
-                else {
-                    self.hour(self.hour() - 1)
-                }
-            }
-            else {
-                self.minute(self.minute() - 1);
-            }
-        }
-        else {
-            self.second(self.second()-10)
-        }
 
         if (self.second().toString().length == 1)
             self.second('0' + self.second());
