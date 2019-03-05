@@ -1,5 +1,5 @@
 //the view model
-var HeatMapViewModel = function() {
+var LiveHeatMapViewModel = function() {
     self = this;
 
     //time variables
@@ -31,92 +31,50 @@ var HeatMapViewModel = function() {
 
     self.selectedUnit = ko.observable("Fahrenheit");
 
-    self.value1 = ko.observable(Math.floor(Math.random() * 20 + self.min()));
-    self.value2 = ko.observable(Math.floor(Math.random() * 20 + self.min()));
-    self.value3 = ko.observable(Math.floor(Math.random() * 20 + self.min()));
-    self.value4 = ko.observable(Math.floor(Math.random() * 20 + self.min()));
-    self.value5 = ko.observable(Math.floor(Math.random() * 20 + self.min()));
-    self.value6 = ko.observable(Math.floor(Math.random() * 20 + self.min()));
-
-    //function used when submit button is clicked
-    self.submit = function () {
-        if (self.selectedUnit() == "Fahrenheit") {
-            self.value1(Math.floor(Math.random() * 20 + self.min()));
-            self.value2(Math.floor(Math.random() * 20 + self.min()));
-            self.value3(Math.floor(Math.random() * 20 + self.min()));
-            self.value4(Math.floor(Math.random() * 20 + self.min()));
-            self.value5(Math.floor(Math.random() * 20 + self.min()));
-            self.value6(Math.floor(Math.random() * 20 + self.min()));
-        }
-        if (self.selectedUnit() == "Celsius") {
-            self.value1(Math.floor(Math.random() * (26.67 - 15.56) + self.min()));
-            self.value2(Math.floor(Math.random() * (26.67 - 15.56) + self.min()));
-            self.value3(Math.floor(Math.random() * (26.67 - 15.56) + self.min()));
-            self.value4(Math.floor(Math.random() * (26.67 - 15.56) + self.min()));
-            self.value5(Math.floor(Math.random() * (26.67 - 15.56) + self.min()));
-            self.value6(Math.floor(Math.random() * (26.67 - 15.56) + self.min()));   
-        }
-        initialize();
-    }
-
     self.selectedUnit.subscribe(function (newValue) {
         if (newValue == "Celsius") {
             self.min(15.56);
             self.max(26.67);
-            self.value1(Math.round((self.value1() - 32) * 5 / 9 * 100) / 100);
-            self.value2(Math.round((self.value2() - 32) * 5 / 9 * 100) / 100);
-            self.value3(Math.round((self.value3() - 32) * 5 / 9 * 100) / 100);
-            self.value4(Math.round((self.value4() - 32) * 5 / 9 * 100) / 100);
-            self.value5(Math.round((self.value5() - 32) * 5 / 9 * 100) / 100);
-            self.value6(Math.round((self.value6() - 32) * 5 / 9 * 100) / 100);
             self.tempNode1(Math.round((self.tempNode1() - 32) * 5 / 9 * 100) / 100);
             self.tempNode2(Math.round((self.tempNode2() - 32) * 5 / 9 * 100) / 100);
             self.tempNode3(Math.round((self.tempNode3() - 32) * 5 / 9 * 100) / 100);
             self.tempNode4(Math.round((self.tempNode4() - 32) * 5 / 9 * 100) / 100);
             self.tempNode5(Math.round((self.tempNode5() - 32) * 5 / 9 * 100) / 100);
             self.tempNode6(Math.round((self.tempNode6() - 32) * 5 / 9 * 100) / 100);
-            
         }
         if (newValue == "Fahrenheit") {
             self.min(60);
             self.max(80);
-            self.value1(Math.round((self.value1() * 9 / 5 + 32) * 100) / 100);
-            self.value2(Math.round((self.value2() * 9 / 5 + 32) * 100) / 100);
-            self.value3(Math.round((self.value3() * 9 / 5 + 32) * 100) / 100);
-            self.value4(Math.round((self.value4() * 9 / 5 + 32) * 100) / 100);
-            self.value5(Math.round((self.value5() * 9 / 5 + 32) * 100) / 100);
-            self.value6(Math.round((self.value6() * 9 / 5 + 32) * 100) / 100);
             self.tempNode1(Math.round((self.tempNode1() * 9 / 5 + 32) * 100) / 100);
             self.tempNode2(Math.round((self.tempNode2() * 9 / 5 + 32) * 100) / 100);
             self.tempNode3(Math.round((self.tempNode3() * 9 / 5 + 32) * 100) / 100);
             self.tempNode4(Math.round((self.tempNode4() * 9 / 5 + 32) * 100) / 100);
             self.tempNode5(Math.round((self.tempNode5() * 9 / 5 + 32) * 100) / 100);
             self.tempNode6(Math.round((self.tempNode6() * 9 / 5 + 32) * 100) / 100);
-            
         }
     });
     
-    self.value1.subscribe(function (newValue) {
+    self.tempNode1.subscribe(function (newValue) {
         initialize();
     });
 
-    self.value2.subscribe(function (newValue) {
+    self.tempNode2.subscribe(function (newValue) {
         initialize();
     });
 
-    self.value3.subscribe(function (newValue) {
+    self.tempNode3.subscribe(function (newValue) {
         initialize();
     });
 
-    self.value4.subscribe(function (newValue) {
+    self.tempNode4.subscribe(function (newValue) {
          initialize();
     });
 
-    self.value5.subscribe(function (newValue) {
+    self.tempNode5.subscribe(function (newValue) {
         initialize();
     });
 
-    self.value6.subscribe(function (newValue) {
+    self.tempNode6.subscribe(function (newValue) {
           initialize();
     });
     
@@ -234,38 +192,38 @@ var HeatMapViewModel = function() {
                 {//Node 1
                     x: self.width() / 8,
                     y: self.height() / 4,
-                    value: self.value1(),
+                    value: self.tempNode1(),
                     radius: self.radius()
 
                 },
                 {//Node 2
                     x: self.width() / 2,
                     y: self.height() / 4,
-                    value: self.value2(),
+                    value: self.tempNode2(),
                     radius: self.radius()
                 },
                 {//Node 3
                     x: self.width() / 8 * 7,
                     y: self.height() / 4,
-                    value: self.value3(),
+                    value: self.tempNode3(),
                     radius: self.radius()
                 },
                 {//Node 4
                     x: self.width() / 8,
                     y: self.height() / 4 * 3,
-                    value: self.value4(),
+                    value: self.tempNode4(),
                     radius: self.radius()
                 },
                 {//Node 5
                     x: self.width() / 2,
                     y: self.height() / 4 * 3,
-                    value: self.value5(),
+                    value: self.tempNode5(),
                     radius: self.radius()
                 },
                 {//Node 6
                     x: self.width() / 8 * 7,
                     y: self.height() / 4 * 3,
-                    value: self.value6(),
+                    value: self.tempNode6(),
                     radius: self.radius()
                 }
             ]
@@ -277,4 +235,4 @@ var HeatMapViewModel = function() {
 };
 
 //binding the viewmodel to the view
-ko.applyBindings(new HeatMapViewModel());
+ko.applyBindings(new LiveHeatMapViewModel());
