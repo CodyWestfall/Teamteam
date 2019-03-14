@@ -153,11 +153,46 @@
     <br />
 
     <div class="text-center">
+        <button class="btn btn-primary" data-bind="click: playClicked, text: playText"></button>
+        <label style="color:black">Past </label>
+        <input class="form text-center" type="radio" name="interval" id="9" value="9" data-bind="checked: interval" />
+
+        <input class="form text-center" type="radio" name="interval" id="8" value="8" data-bind="checked: interval" />
+
+        <input class="form text-center" type="radio" name="interval" id="7" value="7" data-bind="checked: interval" />
+
+        <input class="form text-center" type="radio" name="interval" id="6" value="6" data-bind="checked: interval" />
+
+        <input class="form text-center" type="radio" name="interval" id="5" value="5" data-bind="checked: interval" />
+
+        <input class="form text-center" type="radio" name="interval" id="4" value="4" data-bind="checked: interval" />
+
+        <input class="form text-center" type="radio" name="interval" id="3" value="3" data-bind="checked: interval" />
+
+        <input class="form text-center" type="radio" name="interval" id="2" value="2" data-bind="checked: interval" />
+
+        <input class="form text-center" type="radio" name="interval" id="1" value="1" data-bind="checked: interval" />
+
+        <input class="form text-center" type="radio" checked name="interval" id="0" value="0" data-bind="checked: interval" />
+        <label style="color:black"> Present</label>
+    </div>
+
+    <div class="text-center">
+        <label style="color:black">Displayed Time: </label>
+        <label style="color:black" data-bind="text: displayedTime"></label>
+    </div>
+
+    <div class="text-center">
         <label style="color:black" for="Celsius">Celsius</label>
         <input class="form text-center" type="radio" name="unit" id="Celsius" value="Celsius" data-bind="checked: selectedUnit" />
 
         <label style="color:black" for="Fahrenheit">Fahrenheit</label>
         <input class="form text-center" type="radio" checked name="unit" id="Fahrenheit" value="Fahrenheit" data-bind="checked: selectedUnit" />
+    </div>
+
+    <div class="text-center">
+        <label style="color:black" for="Celsius">Hour Interval</label>
+        <input class="form text-center" type="number" id="time" data-bind="value: time" />
     </div>
 
     <br />

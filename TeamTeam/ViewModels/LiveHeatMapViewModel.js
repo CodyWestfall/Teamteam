@@ -10,6 +10,18 @@ var LiveHeatMapViewModel = function() {
     self.minute = ko.observable('');
     self.second = ko.observable('');
 
+    self.futureyear = ko.observable('');
+    self.futuremonth = ko.observable('');
+    self.futureday = ko.observable('');
+    self.futurehour = ko.observable('');
+    self.futureminute = ko.observable('');
+    self.futuresecond = ko.observable('');
+
+    self.time = ko.observable(1);
+    self.interval = ko.observable("0");
+    self.displayedTime = ko.observable();
+    self.playText = ko.observable("Play");
+
     self.width = ko.observable(1024);
     self.height = ko.observable(720);
     self.radius = ko.observable(550);
@@ -77,12 +89,59 @@ var LiveHeatMapViewModel = function() {
     self.tempNode6.subscribe(function (newValue) {
           initialize();
     });
+
+    self.interval.subscribe(function (newValue) {
+        initialize();
+    });
+
+    self.time.subscribe(function (newValue) {
+        initialize();
+    });
+
+    self.playClicked = function () {
+        if (self.playText() == "Pause") {
+            self.playText("Play");
+        }
+        else { //playText() == "Pause"
+            self.playText("Pause");
+            self.incrementInterval();
+        }
+    }
+
+    self.incrementInterval = function () {
+        if (self.playText() == "Pause") {
+            if (self.interval() == "0")
+                self.interval("9");
+            else if (self.interval() == "9")
+                self.interval("8");
+            else if (self.interval() == "8")
+                self.interval("7");
+            else if (self.interval() == "7")
+                self.interval("6");
+            else if (self.interval() == "6")
+                self.interval("5");
+            else if (self.interval() == "5")
+                self.interval("4");
+            else if (self.interval() == "4")
+                self.interval("3");
+            else if (self.interval() == "3")
+                self.interval("2");
+            else if (self.interval() == "2")
+                self.interval("1");
+            else if (self.interval() == "1")
+                self.interval("0");
+            setTimeout(self.incrementInterval, 2000);
+        }
+    }
     
 
     self.searchTemp = function () {
         var currentDate = new Date();
         currentDate.setSeconds(currentDate.getSeconds() - 60);
+        currentDate.setHours(currentDate.getHours() - (self.interval() * self.time()));
+        self.displayedTime(currentDate);
 
+        //greater than this date
         self.year(currentDate.getUTCFullYear());
         self.month(currentDate.getUTCMonth()+1);
         self.day(currentDate.getUTCDate());
@@ -90,6 +149,14 @@ var LiveHeatMapViewModel = function() {
         self.minute(currentDate.getUTCMinutes());
         self.second(currentDate.getUTCSeconds());
 
+        //less than this date
+        currentDate.setSeconds(currentDate.getSeconds() + 60);
+        self.futureyear(currentDate.getUTCFullYear());
+        self.futuremonth(currentDate.getUTCMonth() + 1);
+        self.futureday(currentDate.getUTCDate());
+        self.futurehour(currentDate.getUTCHours());
+        self.futureminute(currentDate.getUTCMinutes());
+        self.futuresecond(currentDate.getUTCSeconds());
 
         if (self.second().toString().length == 1)
             self.second('0' + self.second());
@@ -106,6 +173,21 @@ var LiveHeatMapViewModel = function() {
         if (self.month().toString().length == 1)
             self.month('0' + self.month());
 
+        if (self.futuresecond().toString().length == 1)
+            self.futuresecond('0' + self.futuresecond());
+
+        if (self.futureminute().toString().length == 1)
+            self.futureminute('0' + self.futureminute());
+
+        if (self.futurehour().toString().length == 1)
+            self.futurehour('0' + self.futurehour());
+
+        if (self.futureday().toString().length == 1)
+            self.futureday('0' + self.futureday());
+
+        if (self.futuremonth().toString().length == 1)
+            self.futuremonth('0' + self.futuremonth());
+
         self.url('https://influx.roomtemp.net:8086/query?db=servicedashboard&q=SELECT+tempc+FROM+temperature,host+WHERE+time+%3E+' + 
             '%27' +
             self.year().toString() +
@@ -119,6 +201,19 @@ var LiveHeatMapViewModel = function() {
             self.minute().toString() + //minute
             '%3A' +
             self.second().toString() +
+            '.000000000Z%27+AND+time+<+' +
+            '%27' +
+            self.futureyear().toString() +
+            '-' +
+            self.futuremonth().toString() +
+            '-' +
+            self.futureday().toString() + //date
+            'T' +
+            self.futurehour().toString() + //hour
+            '%3A' +
+            self.futureminute().toString() + //minute
+            '%3A' +
+            self.futuresecond().toString() +
             '.000000000Z%27+GROUP+BY+host');
 
         $.ajax({
@@ -167,7 +262,8 @@ var LiveHeatMapViewModel = function() {
             }
         });
 
-        setTimeout(self.searchTemp, 5000);
+        if(self.interval() == "0")
+            setTimeout(self.searchTemp, 5000);
     }
 
 
@@ -184,6 +280,7 @@ var LiveHeatMapViewModel = function() {
 
     initialize = function () {
         // boundaries for data generation
+        self.searchTemp();
 
         self.heatmap.setData({
             min: self.min(),
@@ -228,7 +325,6 @@ var LiveHeatMapViewModel = function() {
                 }
             ]
         });
-        self.searchTemp();
     }
 
     initialize();
