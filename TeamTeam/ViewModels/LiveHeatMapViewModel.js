@@ -128,9 +128,12 @@ var LiveHeatMapViewModel = function() {
                 self.interval("2");
             else if (self.interval() == "2")
                 self.interval("1");
-            else if (self.interval() == "1")
+            else if (self.interval() == "1") {
                 self.interval("0");
-            setTimeout(self.incrementInterval, 2000);
+                setTimeout(self.incrementInterval, 3000);
+                return;
+            }
+            setTimeout(self.incrementInterval, 1000);
         }
     }
     

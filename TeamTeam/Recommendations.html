@@ -42,10 +42,94 @@
     <!-- content of page -->
     <div class="container">
 
-        <br />
+        <!--<br />
         <a class="btn btn-info" target="_blank" data-bind="click: submit, text: buttonLabel"></a>
 
-        <a class="btn btn-danger" target="_blank" data-bind="click: submitAlso, visible: neverHot() ">Take off your jacket</a>
+        <a class="btn btn-danger" target="_blank" data-bind="click: submitAlso, visible: neverHot() ">Take off your jacket</a>-->
+
+        <br />
+
+        <div id="accordion1" name="accordion" class="" role="tablist" aria-multiselectable="true">
+
+            <!-- Panel 1 -->
+            <div class="card bg-dark">
+                <div class="card-header bg-dark" id="R1">
+                    <h4 class="card-title ">
+                        <a style="color: white;" role="button" data-toggle="collapse" href="#collapseR1" aria-expanded="true" aria-controls="collapseR1">
+                            Recommendation Genre 1
+                        </a>
+                    </h4>
+                </div>
+                <div style="color:black;" id="collapseR1" class="panel-collapse collapse container card-body bg-secondary" role="tabpanel" aria-labelledby="headingOne">
+                    <ul>
+                        <li>Sample Text</li>
+                        <li>Sample Text</li>
+                        <li>Sample Text</li>
+                    </ul>
+                </div>
+            </div>
+
+            <br />
+
+            <!-- Panel 2 -->
+            <div class="card bg-dark">
+                <div class="card-header bg-dark" id="R2">
+                    <h4 class="card-title ">
+                        <a style="color: white;" role="button" data-toggle="collapse" href="#collapseR2" aria-expanded="true" aria-controls="collapseR2">
+                            Recommendation Genre 2
+                        </a>
+                    </h4>
+                </div>
+                <div style="color:black;" id="collapseR2" class="panel-collapse collapse container card-body bg-secondary" role="tabpanel" aria-labelledby="headingOne">
+                    <ul>
+                        <li>Sample Text</li>
+                        <li>Sample Text</li>
+                        <li>Sample Text</li>
+                    </ul>
+                </div>
+            </div>
+
+            <br />
+
+            <!-- Panel 3 -->
+            <div class="card bg-dark">
+                <div class="card-header bg-dark" id="R3">
+                    <h4 class="card-title ">
+                        <a style="color: white;" role="button" data-toggle="collapse" href="#collapseR3" aria-expanded="true" aria-controls="collapseR3">
+                            Recommendation Genre 3
+                        </a>
+                    </h4>
+                </div>
+                <div style="color:black;" id="collapseR3" class="panel-collapse collapse container card-body bg-secondary" role="tabpanel" aria-labelledby="headingOne">
+                    <ul>
+                        <li>Sample Text</li>
+                        <li>Sample Text</li>
+                        <li>Sample Text</li>
+                    </ul>
+                </div>
+            </div>
+
+            <br />
+
+            <!-- Panel 4 -->
+            <div class="card bg-dark">
+                <div class="card-header bg-dark" id="R4">
+                    <h4 class="card-title ">
+                        <a style="color: white;" role="button" data-toggle="collapse" href="#collapseR4" aria-expanded="true" aria-controls="collapseR4">
+                            Recommendation Genre 4
+                        </a>
+                    </h4>
+                </div>
+                <div style="color:black;" id="collapseR4" class="panel-collapse collapse container card-body bg-secondary" role="tabpanel" aria-labelledby="headingOne">
+                    <ul>
+                        <li>Sample Text</li>
+                        <li>Sample Text</li>
+                        <li>Sample Text</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
 
     </div>
 
@@ -60,6 +144,7 @@
     <script src="Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
     <script src="Scripts/knockout-3.4.2.js" type="text/javascript"></script>
     <script src="Scripts/popper.min.js" type="text/javascript"></script>
+    <script src="Scripts/bootstrap.min.js" type="text/javascript"></script>
     <script src="Scripts/heatmap.min.js" type="text/javascript"></script>
     <script src="ViewModels/RecommendationsViewModel.js"></script>
 </body>
