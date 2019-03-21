@@ -136,6 +136,17 @@ var LiveHeatMapViewModel = function() {
             setTimeout(self.incrementInterval, 1000);
         }
     }
+
+    Array.prototype.remove = function () {
+        var what, a = arguments, L = a.length, ax;
+        while (L && this.length) {
+            what = a[--L];
+            while ((ax = this.indexOf(what)) !== -1) {
+                this.splice(ax, 1);
+            }
+        }
+        return this;
+    };
     
 
     self.searchTemp = function () {
@@ -227,35 +238,157 @@ var LiveHeatMapViewModel = function() {
                 //self.temp(self.result().results[0].series[0].values[0][1]);
 
                 if (self.selectedUnit() == "Celsius") {
-                    for (i = 0; i < self.result().results[0].series.length; i++) {
-                        if (self.result().results[0].series[i].tags.host == 'tempNode1')
-                            self.tempNode1(self.result().results[0].series[i].values[0][1])
-                        if (self.result().results[0].series[i].tags.host == 'tempNode2')
-                            self.tempNode2(self.result().results[0].series[i].values[0][1])
-                        if (self.result().results[0].series[i].tags.host == 'tempNode3')
-                            self.tempNode3(self.result().results[0].series[i].values[0][1])
-                        if (self.result().results[0].series[i].tags.host == 'tempNode4')
-                            self.tempNode4(self.result().results[0].series[i].values[0][1])
-                        if (self.result().results[0].series[i].tags.host == 'tempNode5')
-                            self.tempNode5(self.result().results[0].series[i].values[0][1])
-                        if (self.result().results[0].series[i].tags.host == 'tempNode6')
-                            self.tempNode6(self.result().results[0].series[i].values[0][1])
+                    if (self.result().results[0].series != null) {
+                        nodes = ['tempNode1', 'tempNode2', 'tempNode3', 'tempNode4', 'tempNode5', 'tempNode6'];
+                        for (i = 0; i < self.result().results[0].series.length; i++) {
+                            if (self.result().results[0].series[i].tags.host == 'tempNode1') {
+                                nodes.remove('tempNode1');
+                                if (self.result().results[0].series[i].values != null)
+                                    self.tempNode1(self.result().results[0].series[i].values[0][1])
+                                else {
+                                    self.tempNode1(0);
+                                }
+                            }
+                            if (self.result().results[0].series[i].tags.host == 'tempNode2') {
+                                nodes.remove('tempNode2');
+                                if (self.result().results[0].series[i].values != null)
+                                    self.tempNode2(self.result().results[0].series[i].values[0][1])
+                                else {
+                                    self.tempNode2(0);
+                                }
+                            }
+                            if (self.result().results[0].series[i].tags.host == 'tempNode3') {
+                                nodes.remove('tempNode3');
+                                if (self.result().results[0].series[i].values != null)
+                                    self.tempNode3(self.result().results[0].series[i].values[0][1])
+                                else {
+                                    self.tempNode3(0);
+                                }
+                            }
+                            if (self.result().results[0].series[i].tags.host == 'tempNode4') {
+                                nodes.remove('tempNode4');
+                                if (self.result().results[0].series[i].values != null)
+                                    self.tempNode4(self.result().results[0].series[i].values[0][1])
+                                else {
+                                    self.tempNode4(0);
+                                }
+                            }
+                            if (self.result().results[0].series[i].tags.host == 'tempNode5') {
+                                nodes.remove('tempNode5');
+                                if (self.result().results[0].series[i].values != null)
+                                    self.tempNode5(self.result().results[0].series[i].values[0][1])
+                                else {
+                                    self.tempNode5(0);
+                                }
+                            }
+                            if (self.result().results[0].series[i].tags.host == 'tempNode6') {
+                                nodes.remove('tempNode6');
+                                if (self.result().results[0].series[i].values != null)
+                                    self.tempNode6(self.result().results[0].series[i].values[0][1])
+                                else {
+                                    self.tempNode6(0);
+                                }
+                            }
+                        }
+                            if (nodes != null) {
+                                for (j = 0; j < nodes.length; j++) {
+                                    if (nodes[j] == 'tempNode1') {
+                                        self.tempNode1(0);
+                                    }
+                                    if (nodes[j] == 'tempNode2') {
+                                        self.tempNode2(0);
+                                    }
+                                    if (nodes[j] == 'tempNode3') {
+                                        self.tempNode3(0);
+                                    }
+                                    if (nodes[j] == 'tempNode4') {
+                                        self.tempNode4(0);
+                                    }
+                                    if (nodes[j] == 'tempNode5') {
+                                        self.tempNode5(0);
+                                    }
+                                    if (nodes[j] == 'tempNode6') {
+                                        self.tempNode6(0);
+                                    }
+                                }
+                            }
                     }
                 }
                 else {
-                    for (i = 0; i < self.result().results[0].series.length; i++) {
-                        if (self.result().results[0].series[i].tags.host == 'tempNode1')
-                            self.tempNode1(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
-                        if (self.result().results[0].series[i].tags.host == 'tempNode2')
-                            self.tempNode2(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
-                        if (self.result().results[0].series[i].tags.host == 'tempNode3')
-                            self.tempNode3(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
-                        if (self.result().results[0].series[i].tags.host == 'tempNode4')
-                            self.tempNode4(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
-                        if (self.result().results[0].series[i].tags.host == 'tempNode5')
-                            self.tempNode5(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
-                        if (self.result().results[0].series[i].tags.host == 'tempNode6')
-                            self.tempNode6(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
+                    if (self.result().results[0].series != null) {
+                        nodes = ['tempNode1', 'tempNode2', 'tempNode3', 'tempNode4', 'tempNode5', 'tempNode6'];
+                        for (i = 0; i < self.result().results[0].series.length; i++) {
+                            if (self.result().results[0].series[i].tags.host == 'tempNode1') {
+                                nodes.remove('tempNode1');
+                                if (self.result().results[0].series[i].values != null)
+                                    self.tempNode1(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
+                                else {
+                                    self.tempNode1(0);
+                                }
+                            }
+                            if (self.result().results[0].series[i].tags.host == 'tempNode2') {
+                                nodes.remove('tempNode2');
+                                if (self.result().results[0].series[i].values != null)
+                                    self.tempNode2(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
+                                else {
+                                    self.tempNode2(0);
+                                }
+                            }
+                            if (self.result().results[0].series[i].tags.host == 'tempNode3') {
+                                nodes.remove('tempNode3');
+                                if (self.result().results[0].series[i].values != null)
+                                    self.tempNode3(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
+                                else {
+                                    self.tempNode3(0);
+                                }
+                            }
+                            if (self.result().results[0].series[i].tags.host == 'tempNode4') {
+                                nodes.remove('tempNode4');
+                                if (self.result().results[0].series[i].values != null)
+                                    self.tempNode4(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
+                                else {
+                                    self.tempNode4(0);
+                                }
+                            }
+                            if (self.result().results[0].series[i].tags.host == 'tempNode5') {
+                                nodes.remove('tempNode5');
+                                if (self.result().results[0].series[i].values != null)
+                                    self.tempNode5(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
+                                else {
+                                    self.tempNode5(0);
+                                }
+                            }
+                            if (self.result().results[0].series[i].tags.host == 'tempNode6') {
+                                nodes.remove('tempNode6');
+                                if (self.result().results[0].series[i].values != null)
+                                    self.tempNode6(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
+                                else {
+                                    self.tempNode6(0);
+                                }
+                            }
+                        }
+                            if (nodes != null) {
+                                for (j = 0; j < nodes.length; j++) {
+                                    if (nodes[j] == 'tempNode1') {
+                                        self.tempNode1(0);
+                                    }
+                                    if (nodes[j] == 'tempNode2') {
+                                        self.tempNode2(0);
+                                    }
+                                    if (nodes[j] == 'tempNode3') {
+                                        self.tempNode3(0);
+                                    }
+                                    if (nodes[j] == 'tempNode4') {
+                                        self.tempNode4(0);
+                                    }
+                                    if (nodes[j] == 'tempNode5') {
+                                        self.tempNode5(0);
+                                    }
+                                    if (nodes[j] == 'tempNode6') {
+                                        self.tempNode6(0);
+                                    }
+                                }
+                            }
                     }
                 }
 
