@@ -6,19 +6,15 @@
 	}
 
 	if(!isset($_SESSION["currentUser"])) {
-		header("Location: /cloud/login.php");
+		header("Location: ./login.php");
 		return;
 	}
 
 	$user_check = $_SESSION["currentUser"];
 
-	$result = mysqli_query($conn, "SELECT Username FROM Users WHERE Username = '" . $user_check . "'");
+	$result = mysqli_query($conn, "SELECT username FROM ACCOUNTS WHERE username = '" . $user_check . "'");
 
 	$row = mysqli_fetch_array($result);
 
-	$login_session = $row["Username"];
-
-	if($_SERVER['PHP_SELF'] != "/cloud/files.php" and $_SERVER['PHP_SELF'] != "/cloud/trash.php") {
-		header("Location: /cloud/files.php");
-	}
+	$login_session = $row["username"];
 ?>

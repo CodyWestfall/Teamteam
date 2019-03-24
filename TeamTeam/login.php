@@ -3,14 +3,14 @@
 	require("connectDB.php");
 	session_start();
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
-		$query = "SELECT * FROM Users WHERE Username = '" . $_POST["uname"] . "' AND Password = '" . mysqli_real_escape_string($conn, $_POST["pword"]) . "'";
+		$query = "SELECT * FROM ACCOUNTS WHERE username = '" . $_POST["uname"] . "' AND password = SHA('" . mysqli_real_escape_string($conn, $_POST["pword"]) . "')";
 		$result = mysqli_query($conn, $query);
 
 		if(mysqli_num_rows($result) > 0) {
 			$row = mysqli_fetch_assoc($result);
-			$_SESSION["currentUser"] = $row['Username'];
+			$_SESSION["currentUser"] = $row['username'];
 
-			header("Location: /cloud/files.php");
+			header("Location: ./index.php");
 		} else {
 			$error = "Your Username or Password is Invalid";
 			echo mysqli_error($conn);
@@ -25,13 +25,11 @@
 
 <head>
 
-	<title>piCloud</title>
+	<title>Room Temo Login</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="shortcut icon" type="image/png" href="/cloud/images/favicon.png"/>
-
-	<link rel="stylesheet" type="text/css" href="/cloud/myStyle.css"/>
+	<link rel="shortcut icon" type="image/png" href="./images/RTLogo.png"/>
 
 <style>
 
@@ -83,7 +81,7 @@
 <body>
 	
 	<form method="post" name="login">
-		<img src="/cloud/images/piCloud-logo.png" alt="piCloud Logo" class="logo">
+		<img src="./images/RTLogo.png" alt="piCloud Logo" class="logo">
 		<?php
 			if($_SERVER["REQUEST_METHOD"] == "POST") {
 				echo '<div class="error" style="visibility: visible;">' . $error . '</div>';

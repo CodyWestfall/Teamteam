@@ -1,9 +1,9 @@
 <?php
 
-	$dbhost = "localhost:33306";
-	$username = "pi";
-	$password = "chickenlover";
-	$dbname = "piCloud";
+	$dbhost = "localhost";
+	$username = "ttadmin";
+	$password = "t3amt3amst3amPassword*";
+	$dbname = "roomtemp";
 
 	$conn = mysqli_connect($dbhost, $username, $password, $dbname);
 
