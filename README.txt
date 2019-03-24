@@ -11,7 +11,7 @@ System Overview
 http://192.168.1.28:3000/d/joz7Lkaik/linux-system-dashboard?refresh=10s&orgId=1
 
 local site location
-http://192.168.1.27/index.html
+http://192.168.1.27/index.php
 
 Virtual Machine dashboard
 https://n1.tehhax.com/#v1:0:=lxc%2F303:4::::::

@@ -6,7 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TeamTeam", "TeamTeam", "{192AFFDF-44F3-4A94-9657-F100C375ED3B}"
 	ProjectSection(SolutionItems) = preProject
 		TeamTeam\HeatMap.html = TeamTeam\HeatMap.html
-		TeamTeam\index.html = TeamTeam\index.html
+		TeamTeam\index.php = TeamTeam\index.php
 		README.txt = README.txt
 		TeamTeam\Recommendations.html = TeamTeam\Recommendations.html
 	EndProjectSection

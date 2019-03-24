@@ -1,10 +1,14 @@
-﻿<!doctype html>
+﻿<?php
+	require ("./session.php");
+?>
+
+<!doctype html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="./images/RTLogo.png" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
@@ -46,6 +50,11 @@
                     <a class="nav-link" href="Recommendations.html">Recommendations</a>
                 </li>
             </ul>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="./logout.php">Logout</a>
+				</li>
+			</ul>
         </div>
     </nav>
 
