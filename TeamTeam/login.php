@@ -78,7 +78,7 @@
 
 </head>
 
-<body>
+<body style="background-color:dimgrey;">
 	
 	<form method="post" name="login">
 		<img src="./images/RTLogo.png" alt="piCloud Logo" class="logo">
