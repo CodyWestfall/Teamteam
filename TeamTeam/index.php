@@ -44,7 +44,7 @@
                     <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="LiveHeatMap.html">Heat Map</a>
+                    <a class="nav-link" href="LiveHeatMap.php">Heat Map</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Recommendations.html">Recommendations</a>
@@ -114,7 +114,7 @@
 
                 <!--<div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12 text-center">
-                        <a role="button" href="LiveHeatMap.html" class="btn btn-primary btn-lg center-block">Heat Map</a>
+                        <a role="button" href="LiveHeatMap.php" class="btn btn-primary btn-lg center-block">Heat Map</a>
                     </div>
                 </div>
 
