@@ -259,7 +259,7 @@
 </body>
 
 <?php else: ?>
-<body>
+<body style="background-color:dimgrey;">
     <!-- NavBar -->
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <a class="navbar-brand" href="index.php">Team Team</a>
@@ -289,15 +289,26 @@
     <br />
 
     <!-- Content of page -->
-    <form class="form" method="POST" id="roomSelect">
-		<select name="RoomId" form="roomSelect">
-			<?php for($i = 0; $i < sizeOf($listOfRoomIds); $i++) {
-				echo "<option value=\"".$listOfRoomIds[$i]."\">".$listOfRoomNames[$i]."</option>";
-			}?>
-		</select>
+	<div class="container">
+		<form class="form" method="POST" id="roomSelect">
+			<select class="btn btn-secondary" name="RoomId" form="roomSelect">
+				<?php for($i = 0; $i < sizeOf($listOfRoomIds); $i++) {
+					echo "<option value=\"".$listOfRoomIds[$i]."\">".$listOfRoomNames[$i]."</option>";
+				}?>
+			</select>
 
-		<input type="submit" value="Select Room" />
-	</form>
+			<input class="btn btn-primary" type="submit" value="Select Room" />
+		</form>
+	</div>
+
+	<!-- Scripts -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="Scripts/knockout-3.4.2.js" type="text/javascript"></script>
+    <script src="Scripts/popper.min.js" type="text/javascript"></script>
+    <script src="Scripts/heatmap.min.js" type="text/javascript"></script>
+    <script src="ViewModels/LiveHeatMapViewModel.js"></script>
 </body>
 
 <?php endif; ?>
