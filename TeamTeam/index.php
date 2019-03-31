@@ -108,7 +108,7 @@
             <div class="col-md-12 col-lg-12 col-sm-12">
                 <h3 class="text-center">Welcome to Room Temp!</h3>
                 <h3 class="text-center">Hand crafted with love by: </h3>
-                <h3 class="text-center">Matt Fair, Jacob Morrison, David Nikonowicz, Caleb Philips, Erin Rourke, Cody Westfall</h3>
+                <h3 class="text-center">Matt Fair, Jacob Morrison, David Nikonowicz, Caleb Phillips, Erin Rourke, Cody Westfall</h3>
 
                 <br>
 

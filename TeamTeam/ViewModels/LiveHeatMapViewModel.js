@@ -22,9 +22,9 @@ var LiveHeatMapViewModel = function() {
     self.displayedTime = ko.observable();
     self.playText = ko.observable("Play");
 
-    self.width = ko.observable(1024);
-    self.height = ko.observable(720);
-    self.radius = ko.observable(550);
+    self.width = ko.observable(400);
+    self.height = ko.observable(400);
+    self.radius = ko.observable(250);
 
     self.url = ko.observable();
 
@@ -34,12 +34,7 @@ var LiveHeatMapViewModel = function() {
     self.result = ko.observable();
 
     //node values
-    self.tempNode1 = ko.observable(0);
-    self.tempNode2 = ko.observable(0);
-    self.tempNode3 = ko.observable(0);
-    self.tempNode4 = ko.observable(0);
-    self.tempNode5 = ko.observable(0);
-    self.tempNode6 = ko.observable(0);
+    self.nodeArray = ko.observableArray([]);
 
     self.selectedUnit = ko.observable("Fahrenheit");
 
@@ -66,28 +61,8 @@ var LiveHeatMapViewModel = function() {
         }
     });
     
-    self.tempNode1.subscribe(function (newValue) {
+    self.nodeArray(function (newValue) {
         initialize();
-    });
-
-    self.tempNode2.subscribe(function (newValue) {
-        initialize();
-    });
-
-    self.tempNode3.subscribe(function (newValue) {
-        initialize();
-    });
-
-    self.tempNode4.subscribe(function (newValue) {
-         initialize();
-    });
-
-    self.tempNode5.subscribe(function (newValue) {
-        initialize();
-    });
-
-    self.tempNode6.subscribe(function (newValue) {
-          initialize();
     });
 
     self.interval.subscribe(function (newValue) {
@@ -147,7 +122,18 @@ var LiveHeatMapViewModel = function() {
         }
         return this;
     };
-    
+
+    self.getNodes = function () {
+        self.tempArray = ko.observableArray([]);
+        $(".node").each(function (index) {
+            self.tempArray.push({ index: index, 
+                                  x: $(this).position().left, 
+                                  y: $(this).position().top, 
+                                  id: $(this).attr("alt"),
+                                  temp: ko.observable(0)});
+        });
+        self.nodeArray(self.tempArray());
+    }
 
     self.searchTemp = function () {
         var currentDate = new Date();
@@ -235,164 +221,69 @@ var LiveHeatMapViewModel = function() {
             dataType: "json",
             success: function (data) {
                 self.result(data);
-                //self.temp(self.result().results[0].series[0].values[0][1]);
+                tempNodes = [];
+                for (k = 0; k < self.nodeArray().length; k++) {
+                    tempNodes.push(self.nodeArray()[k]);
+                }
 
                 if (self.selectedUnit() == "Celsius") {
                     if (self.result().results[0].series != null) {
-                        nodes = ['tempNode1', 'tempNode2', 'tempNode3', 'tempNode4', 'tempNode5', 'tempNode6'];
                         for (i = 0; i < self.result().results[0].series.length; i++) {
-                            if (self.result().results[0].series[i].tags.host == 'tempNode1') {
-                                nodes.remove('tempNode1');
-                                if (self.result().results[0].series[i].values != null)
-                                    self.tempNode1(self.result().results[0].series[i].values[0][1])
-                                else {
-                                    self.tempNode1(0);
-                                }
-                            }
-                            if (self.result().results[0].series[i].tags.host == 'tempNode2') {
-                                nodes.remove('tempNode2');
-                                if (self.result().results[0].series[i].values != null)
-                                    self.tempNode2(self.result().results[0].series[i].values[0][1])
-                                else {
-                                    self.tempNode2(0);
-                                }
-                            }
-                            if (self.result().results[0].series[i].tags.host == 'tempNode3') {
-                                nodes.remove('tempNode3');
-                                if (self.result().results[0].series[i].values != null)
-                                    self.tempNode3(self.result().results[0].series[i].values[0][1])
-                                else {
-                                    self.tempNode3(0);
-                                }
-                            }
-                            if (self.result().results[0].series[i].tags.host == 'tempNode4') {
-                                nodes.remove('tempNode4');
-                                if (self.result().results[0].series[i].values != null)
-                                    self.tempNode4(self.result().results[0].series[i].values[0][1])
-                                else {
-                                    self.tempNode4(0);
-                                }
-                            }
-                            if (self.result().results[0].series[i].tags.host == 'tempNode5') {
-                                nodes.remove('tempNode5');
-                                if (self.result().results[0].series[i].values != null)
-                                    self.tempNode5(self.result().results[0].series[i].values[0][1])
-                                else {
-                                    self.tempNode5(0);
-                                }
-                            }
-                            if (self.result().results[0].series[i].tags.host == 'tempNode6') {
-                                nodes.remove('tempNode6');
-                                if (self.result().results[0].series[i].values != null)
-                                    self.tempNode6(self.result().results[0].series[i].values[0][1])
-                                else {
-                                    self.tempNode6(0);
+                            for (j = 0; j < self.nodeArray().length; j++) {
+                                if (self.result().results[0].series[i].tags.host == self.nodeArray()[j].id) {
+                                    tempNodes.remove(self.nodeArray()[j]);
+                                    if (self.result().results[0].series[i].values != null)
+                                        self.nodeArray()[j].temp(self.result().results[0].series[i].values[0][1])
+                                    else {
+                                        self.nodeArray()[j].temp(0);
+                                    }
                                 }
                             }
                         }
-                            if (nodes != null) {
-                                for (j = 0; j < nodes.length; j++) {
-                                    if (nodes[j] == 'tempNode1') {
-                                        self.tempNode1(0);
-                                    }
-                                    if (nodes[j] == 'tempNode2') {
-                                        self.tempNode2(0);
-                                    }
-                                    if (nodes[j] == 'tempNode3') {
-                                        self.tempNode3(0);
-                                    }
-                                    if (nodes[j] == 'tempNode4') {
-                                        self.tempNode4(0);
-                                    }
-                                    if (nodes[j] == 'tempNode5') {
-                                        self.tempNode5(0);
-                                    }
-                                    if (nodes[j] == 'tempNode6') {
-                                        self.tempNode6(0);
-                                    }
+                        if (tempNodes() != null) {
+                            for (j = 0; j < tempNodes.length; j++) {
+                                node = {
+                                    index: tempNodes()[j].index,
+                                    x: tempNodes()[j].x,
+                                    y: tempNodes()[j].y,
+                                    id: tempNodes()[j].id,
+                                    temp: ko.observable(0)
                                 }
+                                self.nodeArray.replace(tempNodes()[j], node);
                             }
+                        }
                     }
                 }
                 else {
                     if (self.result().results[0].series != null) {
-                        nodes = ['tempNode1', 'tempNode2', 'tempNode3', 'tempNode4', 'tempNode5', 'tempNode6'];
                         for (i = 0; i < self.result().results[0].series.length; i++) {
-                            if (self.result().results[0].series[i].tags.host == 'tempNode1') {
-                                nodes.remove('tempNode1');
-                                if (self.result().results[0].series[i].values != null)
-                                    self.tempNode1(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
-                                else {
-                                    self.tempNode1(0);
-                                }
-                            }
-                            if (self.result().results[0].series[i].tags.host == 'tempNode2') {
-                                nodes.remove('tempNode2');
-                                if (self.result().results[0].series[i].values != null)
-                                    self.tempNode2(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
-                                else {
-                                    self.tempNode2(0);
-                                }
-                            }
-                            if (self.result().results[0].series[i].tags.host == 'tempNode3') {
-                                nodes.remove('tempNode3');
-                                if (self.result().results[0].series[i].values != null)
-                                    self.tempNode3(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
-                                else {
-                                    self.tempNode3(0);
-                                }
-                            }
-                            if (self.result().results[0].series[i].tags.host == 'tempNode4') {
-                                nodes.remove('tempNode4');
-                                if (self.result().results[0].series[i].values != null)
-                                    self.tempNode4(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
-                                else {
-                                    self.tempNode4(0);
-                                }
-                            }
-                            if (self.result().results[0].series[i].tags.host == 'tempNode5') {
-                                nodes.remove('tempNode5');
-                                if (self.result().results[0].series[i].values != null)
-                                    self.tempNode5(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
-                                else {
-                                    self.tempNode5(0);
-                                }
-                            }
-                            if (self.result().results[0].series[i].tags.host == 'tempNode6') {
-                                nodes.remove('tempNode6');
-                                if (self.result().results[0].series[i].values != null)
-                                    self.tempNode6(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100)
-                                else {
-                                    self.tempNode6(0);
+                            for (j = 0; j < self.nodeArray().length; j++) {
+                                if (self.result().results[0].series[i].tags.host == self.nodeArray()[j].id) {
+                                    tempNodes.remove(self.nodeArray()[j]);
+                                    if (self.result().results[0].series[i].values != null)
+                                        self.nodeArray()[j].temp(Math.round((self.result().results[0].series[i].values[0][1] * 9 / 5 + 32) * 100) / 100);
+                                    else {
+                                        self.nodeArray()[j].temp(0);
+                                    }
                                 }
                             }
                         }
-                            if (nodes != null) {
-                                for (j = 0; j < nodes.length; j++) {
-                                    if (nodes[j] == 'tempNode1') {
-                                        self.tempNode1(0);
-                                    }
-                                    if (nodes[j] == 'tempNode2') {
-                                        self.tempNode2(0);
-                                    }
-                                    if (nodes[j] == 'tempNode3') {
-                                        self.tempNode3(0);
-                                    }
-                                    if (nodes[j] == 'tempNode4') {
-                                        self.tempNode4(0);
-                                    }
-                                    if (nodes[j] == 'tempNode5') {
-                                        self.tempNode5(0);
-                                    }
-                                    if (nodes[j] == 'tempNode6') {
-                                        self.tempNode6(0);
-                                    }
+                        if (tempNodes.length > 0) {
+                            for (j = 0; j < tempNodes.length; j++) {
+                                node = {
+                                    index: tempNodes[j].index,
+                                    x: tempNodes[j].x,
+                                    y: tempNodes[j].y,
+                                    id: tempNodes[j].id,
+                                    temp: ko.observable(0)
                                 }
+                                self.nodeArray.replace(tempNodes[j], node);
                             }
+                        }
                     }
                 }
 
-                },
+            },
             error: function (data) {
                 self.result(data);
             }
@@ -404,7 +295,7 @@ var LiveHeatMapViewModel = function() {
 
 
     self.heatmap = h337.create({
-        container: document.getElementById('heatmapContainer'),
+        container: document.getElementById('heatmapdiv'),
         gradient:
         {
             0.15: "rgb(0,0,255)",
@@ -416,54 +307,38 @@ var LiveHeatMapViewModel = function() {
 
     initialize = function () {
         // boundaries for data generation
+        self.width($(drawArea).width());
+        self.height($(drawArea).height());
+
+        $(".heatmapdiv").width($("#drawArea").width());
+        $(".heatmapdiv").height($("#drawArea").height());
+        $('.heatmap-canvas').position("relative");
+        $('.heatmap-canvas').css('zIndex', '-1');
+
+        if ($(".node").length != self.nodeArray().length)
+            self.getNodes();
         self.searchTemp();
+        mapdata = [];
+        for (i = 0; i < self.nodeArray().length; i++) {
+            mapdata.push({
+                x: self.nodeArray()[i].x,
+                y: self.nodeArray()[i].y,
+                value: self.nodeArray()[i].temp(),
+                radius: self.radius()
+            })
+        }
 
         self.heatmap.setData({
             min: self.min(),
             max: self.max(),
-            data: [
-                {//Node 1
-                    x: self.width() / 16,
-                    y: self.height() / 8,
-                    value: self.tempNode1(),
-                    radius: self.radius()
-
-                },
-                {//Node 2
-                    x: self.width() / 2,
-                    y: self.height() / 8,
-                    value: self.tempNode2(),
-                    radius: self.radius()
-                },
-                {//Node 3
-                    x: self.width() / 16 * 15,
-                    y: self.height() / 8,
-                    value: self.tempNode3(),
-                    radius: self.radius()
-                },
-                {//Node 4
-                    x: self.width() / 16,
-                    y: self.height() / 8 * 7,
-                    value: self.tempNode4(),
-                    radius: self.radius()
-                },
-                {//Node 5
-                    x: self.width() / 2,
-                    y: self.height() / 8 * 7,
-                    value: self.tempNode5(),
-                    radius: self.radius()
-                },
-                {//Node 6
-                    x: self.width() / 16 * 15,
-                    y: self.height() / 8 * 7,
-                    value: self.tempNode6(),
-                    radius: self.radius()
-                }
-            ]
+            data: mapdata
         });
+
     }
 
     initialize();
+
+    self.playClicked();
 };
 
 //binding the viewmodel to the view
