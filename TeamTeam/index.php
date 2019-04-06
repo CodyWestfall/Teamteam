@@ -46,8 +46,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="LiveHeatMap.php">Heat Map</a>
                 </li>
+				<li class="nav-item">
+                    <a class="nav-link" href="LiveHumidityMap.php">Humidity Map</a>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Recommendations.html">Recommendations</a>
+                    <a class="nav-link" href="Recommendations.html">Report</a>
+                </li>
+				<li class="nav-item">
+                    <a class="nav-link" href="SetupInstructions.pdf">Setup Instructions</a>
                 </li>
             </ul>
 			<ul class="navbar-nav ml-auto">

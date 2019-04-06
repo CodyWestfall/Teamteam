@@ -6,48 +6,48 @@ require_once('./session.php');
 //if (!isset($_SESSION["room_selected"])) {
 //	header('Location: ./LiveHeatMap.php');
 //}
-//copy pasta from liveheatmap.php to check room selected
-$isRoomSelected = false;
+	//copy pasta from liveheatmap.php to check room selected
+	$isRoomSelected = false;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$isRoomSelected = true;
-	$stmt = $conn->prepare('SELECT serial FROM NODES WHERE roomid = ?');
-	$stmt->bind_param('i', $selectedRoom);
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		$isRoomSelected = true;
+		$stmt = $conn->prepare('SELECT serial FROM NODES WHERE roomid = ?');
+		$stmt->bind_param('i', $selectedRoom);
 		
-	$_SESSION["room_selected"] = filter_input(INPUT_POST, 'RoomId', FILTER_SANITIZE_STRING);
-	$selectedRoom = $_SESSION["room_selected"];
+		$_SESSION["room_selected"] = filter_input(INPUT_POST, 'RoomId', FILTER_SANITIZE_STRING);
+		$selectedRoom = $_SESSION["room_selected"];
 
-	$stmt->execute();
-	$stmt->store_result();
-	$stmt->bind_result($serial);
+		$stmt->execute();
+		$stmt->store_result();
+		$stmt->bind_result($serial);
 
-	$listOfNodes = array();
-	while($stmt->fetch()) {
-		array_push($listOfNodes, $serial);
-	}
+		$listOfNodes = array();
+		while($stmt->fetch()) {
+			array_push($listOfNodes, $serial);
+		}
 
-	$stmt->free_result();
-	$stmt->close();
-} else {
-	$stmt = $conn->prepare('SELECT roomid, name FROM ROOMS WHERE username = ?');
-	$stmt->bind_param('s', $userName);
+		$stmt->free_result();
+		$stmt->close();
+	} else {
+		$stmt = $conn->prepare('SELECT roomid, name FROM ROOMS WHERE username = ?');
+		$stmt->bind_param('s', $userName);
 		
-	$userName = $account_name;
+		$userName = $account_name;
 
-	$stmt->execute();
-	$stmt->store_result();
-	$stmt->bind_result($roomid, $name);
+		$stmt->execute();
+		$stmt->store_result();
+		$stmt->bind_result($roomid, $name);
 
-	$listOfRoomIds = array();
-	$listOfRoomNames = array();
-	while($stmt->fetch()) {
-		array_push($listOfRoomIds, $roomid);
-		array_push($listOfRoomNames, $name);
+		$listOfRoomIds = array();
+		$listOfRoomNames = array();
+		while($stmt->fetch()) {
+			array_push($listOfRoomIds, $roomid);
+			array_push($listOfRoomNames, $name);
+		}
+
+		$stmt->free_result();
+		$stmt->close();
 	}
-
-	$stmt->free_result();
-	$stmt->close();
-}
 
 $stmt = $conn->prepare('SELECT serial, pos_x, pos_y FROM NODES WHERE roomid = ?');
 $stmt->bind_param('i', $roomId);
@@ -77,7 +77,7 @@ $stmt->close();
 
 <head>
     <meta charset="utf-8">
-    <title>Live Heat Map</title>
+    <title>Live Humidity Map</title>
     <script src="./Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
@@ -95,7 +95,7 @@ $stmt->close();
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
-        }
+        } 
 
         #canvasWrap {
             position: relative;
@@ -188,10 +188,10 @@ $stmt->close();
                 <li class="nav-item">
                     <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="LiveHeatMap.php">Heat Map</a>
                 </li>
-				<li class="nav-item">
+				<li class="nav-item active">
                     <a class="nav-link" href="LiveHumidityMap.php">Humidity Map</a>
                 </li>
                 <li class="nav-item">
@@ -212,11 +212,8 @@ $stmt->close();
     <br />
 
 	<!-- CONTENT OF PAGE -->
-	<!-- only display if there is currently a room selected -->
 	<?php if ($isRoomSelected): ?>
-	<!-- First row to represent the drawable map -->
 	<div class="row">
-		<!-- Small column for input button -->
 		<div class=" col-md-2">
 			<div class="text-center" id="buttons">
 				<button class="btn btn-default" style="width: 150px" id="addNode">Add Node</button>
@@ -230,13 +227,14 @@ $stmt->close();
 				</form>
 			</div>
 		</div>
-		<!-- Wide column for the map itslef -->
+
 		<div class="container col-md-10">
 			<div id="canvasWrap" ondragover="allowDrop(event)" ondrop="drop(event)">
 				<canvas id="drawArea" width="1000" height="500"></canvas>
 				<?php
 				for ($i = 0; $i < sizeOf($nodesInRoom); $i++) {
 					echo "<img id='node$i' class='node' style='position: absolute; cursor: move; left: $xPositions[$i]px; top: $yPositions[$i]px;' src='./images/node.png' alt='$nodesInRoom[$i]' title='$nodesInRoom[$i]' width='50' height='50' draggable='true' ondragstart='drag(event)' />";
+					echo "<p class='hover-text'  text='$nodesInRoom[$i]'></p>";
 				}
 				?>
 			</div>
@@ -246,9 +244,7 @@ $stmt->close();
 
 	<br/>
 
-	<!-- Second row for the heatmap -->
 	<div class="row">
-	<!-- small column for the inputs and display information -->
 		<div class=" col-md-2">
 			<div class="text-center">
 				<button class="btn btn-default" data-bind="click: playClicked, text: playText"></button>
@@ -288,14 +284,11 @@ $stmt->close();
 				<input class="form text-center" style="width: 150px;" type="number" id="time" data-bind="value: time" />
 			</div>
 		</div>
-		<!-- wide column for the heatmap itself -->
 		<div class="container col-md-10">
-			<div id="heatmapdiv" class="heatmapdiv" style="width:1000px; height: 1000px; border: 2px solid black; overflow: hidden;">
-			</div>
+			<div id="heatmapdiv" class="heatmapdiv" style="width:1000px; height: 1000px; border: 2px solid black; overflow: hidden;"></div>
 		</div>
 	</div>
-
-	<!-- if there is no room selected, display the room selection -->
+	
 	<?php else: ?>
 	<!-- Content of page -->
 	<div class="container">
@@ -318,9 +311,10 @@ $stmt->close();
 	<script src="Scripts/knockout-3.4.2.js" type="text/javascript"></script>
 	<script src="Scripts/popper.min.js" type="text/javascript"></script>
 	<script src="Scripts/heatmap.min.js" type="text/javascript"></script>
-	<script src="ViewModels/LiveHeatMapViewModel.js"></script>
+	<script src="ViewModels/LiveHumidityMapViewModel.js"></script>
 
     <script>
+		
 
         // initiate global variables
         var canvas, ctx, mouseX, mouseY, mouseDown = 0,
@@ -341,7 +335,7 @@ $stmt->close();
             $('#Freestyle').on('click', useFreeDraw);
             $('#Rectangle').on('click', useRectDraw);
             $('#addNode').on('click', createNode);
-            $('.node').on('dblclick', deleteNode);
+			$('.node').on('dblclick', deleteNode);
             $('#Undo').on('click', function() {
                 if (undoStack.length > 0) {
                     redoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
@@ -412,7 +406,6 @@ $stmt->close();
 						img.on('dblclick', deleteNode);
                         $('#canvasWrap').append(img);
                         $('#modal').remove();
-						LiveHeatMapViewModel.getNodes();
 						location.reload();
                     });
                 }
@@ -481,8 +474,6 @@ $stmt->close();
             getMousePos(ev);
             $('#' + ev.dataTransfer.getData('id')).css('left', mouseX - oldX);
             $('#' + ev.dataTransfer.getData('id')).css('top', mouseY - oldY);
-			$('#tempText' + ev.dataTransfer.getData('id').substring(4)).css('left', mouseX - oldX);
-			$('#tempText' + ev.dataTransfer.getData('id').substring(4)).css('top', mouseY - oldY);
             url = "./updateNodeLocation.php";
             data = {
                 nodeSerial: $('#' + ev.dataTransfer.getData('id')).attr('alt'),
